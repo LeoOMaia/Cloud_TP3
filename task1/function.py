@@ -1,6 +1,6 @@
 def handler(input: dict, context: object) -> dict:
     # a quantidade de CPUs do sistema é fixa, utilizamos psutil para obter essa informação antes de criar a função
-    cpu = 16
+    cpus = 16
 
     # porcentagem de uso de cada CPU
     cpu_percent = {}
@@ -25,7 +25,7 @@ def handler(input: dict, context: object) -> dict:
     # média móvel de utilização de cada CPU no ultimo minuto
     moving_average = {}
     for i in range(cpus):
-        use = context.env.get(f'cpu-{i}')
+        use = context.env.get(f'cpu-{i}', [])
         use.append(cpu_percent[i])
         if len(use) > 60:
             use.pop(0)
