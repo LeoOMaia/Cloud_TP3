@@ -13,8 +13,9 @@ kubectl create configmap pyfile --from-file pyfile=function.py --output yaml > p
 kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml > outputkey.yaml
 kubectl -n leonardomaia apply -f deployment.yaml
 ```
-Para ver se esta correto, verifique os logs
+Para ver se esta correto, verifique os logs.
 ```
+kubectl get pods
 kubectl logs <name pod>
 ```
 ### TASK 2

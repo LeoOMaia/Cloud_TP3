@@ -21,8 +21,8 @@ data:
     = moving_average[i]\n    return return_dict"
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-12-12T20:05:27Z"
+  creationTimestamp: "2023-12-12T21:26:40Z"
   name: pyfile
   namespace: leonardomaia
-  resourceVersion: "4391515"
-  uid: 97d3dc37-174a-4419-8289-6f7c8f6e74bf
+  resourceVersion: "4398898"
+  uid: b7970405-8939-4edb-bd00-b327fb135bf6
