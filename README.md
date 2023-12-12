@@ -7,8 +7,7 @@ kubectl delete deploy serverless-redis
 kubectl delete configmap pyfile
 kubectl delete configmap outputkey
 ```
-Criando files `pyfile.yaml`, `outputkey.yaml` e seus configmap.
-Criando o pod.
+Criando files `pyfile.yaml`, `outputkey.yaml` e seus respectivos configmap, e criando pod.
 ```
 kubectl create configmap pyfile --from-file pyfile=function.py --output yaml > pyfile.yaml
 kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml > outputkey.yaml
@@ -19,8 +18,9 @@ Para ver se esta correto, verifique os logs
 kubectl logs <name pod>
 ```
 ### TASK 2
-Usamos git actions para atualizar a imagem do dockerhub.
-Criando pod e serviço
+Usamos `git actions` para atualizar a imagem do dockerhub.
+
+Criando pod e serviço.
 ```
 kubectl -n leonardomaia apply -f deployment.yaml -f service.yaml
 ```
