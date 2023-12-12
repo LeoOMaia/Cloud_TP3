@@ -1,8 +1,6 @@
-import psutil
-
 def handler(input: dict, context: object) -> dict:
-    # pega a quantidade de CPUs
-    cpus = psutil.cpu_count()
+    # a quantidade de CPUs do sistema é fixa, utilizamos psutil para obter essa informação antes de criar a função
+    cpu = 16
 
     # porcentagem de uso de cada CPU
     cpu_percent = {}
