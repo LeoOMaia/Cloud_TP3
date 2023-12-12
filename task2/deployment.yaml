@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      ## Dashboard Container ##
+      containers:
+      - name: cloud-my-dashboard
+        image: leoomaia/cloud_my_dashboard
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 32196
