@@ -21,6 +21,9 @@ GET leonardooliveira-proj3-output
 ### TASK 2
 Usamos `git actions` para atualizar a imagem do dockerhub.
 
+Para esta task sera preciso o pod da task1 
+ou pod da taks3 rodando para o dashboard retirar informacoes.
+
 Subindo servico
 ```
 kubectl -n leonardomaia apply -f service.yaml
@@ -33,3 +36,19 @@ kubectl -n leonardomaia apply -f deployment.yaml
 Deve-se colocar forward para acessar o servico em Ports do VSCode.
 ```
 <ip Cluster>:32196
+```
+### TASK 3
+Usamos `git actions` para atualizar a imagem do dockerhub.
+
+Deletando pod e arquivos no namespace se existirem.
+```
+kubectl delete deploy runtime
+kubectl delete configmap pyfile
+kubectl delete configmap outputkey
+```
+Criando apenas configmap e criando pod.
+```
+kubectl create configmap pyfile --from-file pyfile=../task1/function.py --output yaml
+kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml
+kubectl -n leonardomaia apply -f deployment.yaml
+```
