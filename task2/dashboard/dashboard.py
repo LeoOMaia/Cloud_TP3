@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, dash
 from dash.dependencies import Input, Output
 import redis
 import json
