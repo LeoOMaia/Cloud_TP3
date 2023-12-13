@@ -30,3 +30,6 @@ Criando ou Renovando pod
 kubectl delete deploy dashboard
 kubectl -n leonardomaia apply -f deployment.yaml
 ```
+Deve-se colocar forward para acessar o servico em Ports do VSCode.
+```
+<ip Cluster>:32196
