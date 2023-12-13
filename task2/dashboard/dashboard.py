@@ -33,7 +33,7 @@ app.layout = html.Div([
         dcc.Graph(id='mem-graph'),
         html.Label('Tráfego de Rede'),
         dcc.Graph(id='net-graph'),
-    ]),
+    ], style={'background-color': 'lightgray'}),
     dcc.Interval(
         id='interval-component-resources',
         interval=1*1000,  # 1 segundo
@@ -46,7 +46,7 @@ app.layout = html.Div([
         interval=1*1000,  # Atualização a cada 1 segundo
         n_intervals=0
     )
-])
+], style={'font-family': 'Arial', 'padding': '20px'})
 
 # Callback para atualizar Recursos do sistema
 @app.callback(
@@ -98,12 +98,18 @@ def update_graph(n):
     
     # Criando o gráfico de barras
     trace = go.Bar(
-        x=x,
-        y=y,
-        name='Media Movel de CPUs',
-    )
+    x=x,
+    y=y,
+    name='Media Movel de CPUs',
+    marker=dict(color='rgba(50, 168, 82, 0.6)'),  # Define a cor das barras
+    )   
     
-    layout = go.Layout(title='Média Móvel de CPUs', yaxis=dict(range=[0, 100]))
+    layout = go.Layout(
+    title='Média Móvel de CPUs',
+    yaxis=dict(range=[0, 100]),
+    plot_bgcolor='rgba(240, 240, 240, 0.8)',  # Define a cor de fundo do gráfico
+    paper_bgcolor='rgba(240, 240, 240, 0.8)'  # Define a cor de fundo do papel onde o gráfico é plotado
+    )
     return {'data': [trace], 'layout': layout}
 
 
