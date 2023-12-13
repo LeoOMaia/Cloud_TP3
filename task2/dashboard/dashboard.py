@@ -28,15 +28,15 @@ app = Dash(__name__)
 # Layout do Dashboard
 app.layout = html.Div([
     html.H1("Uso de recursos do sistema", 
-            style={'text-align': 'center', color: 'teal', 'font-family': 'Arial', 'padding': '20px'}
+            style={'text-align': 'center', 'color': 'teal', 'font-family': 'Arial', 'padding': '20px'}
     ),
     html.Div([
         html.Label('Memória', 
-                   style={'text-align': 'center', color: 'red', 'font-family': 'Arial', 'padding': '20px'}
+                   style={'text-align': 'center', 'color': 'red', 'font-family': 'Arial', 'padding': '20px'}
         ),
         dcc.Graph(id='mem-graph'),
         html.Label('Tráfego de Rede',
-                   style={'text-align': 'center', color: 'red', 'font-family': 'Arial', 'padding': '20px'}
+                   style={'text-align': 'center', 'color': 'red', 'font-family': 'Arial', 'padding': '20px'}
         ),
         dcc.Graph(id='net-graph'),
     ], style={'background-color': 'lightgray'}),
@@ -46,7 +46,7 @@ app.layout = html.Div([
         n_intervals=0
     ),
     html.H1("Média Móvel de CPUs",
-            style={'text-align': 'center', color: 'red', 'font-family': 'Arial', 'padding': '20px'}
+            style={'text-align': 'center', 'color': 'red', 'font-family': 'Arial', 'padding': '20px'}
     ),
     dcc.Graph(id='live-update-graph'),
     dcc.Interval(
