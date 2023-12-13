@@ -23,24 +23,24 @@ def Date_from_redis():
 mem_percent, net_percent, moving_average = Date_from_redis()
 
 # Criando o Dashboard
-app = Dash(__name__, external_stylesheets=['styles.css'])
+app = Dash(__name__,)
 
 # Layout do Dashboard
 app.layout = html.Div([
-    html.H1("Uso de recursos do sistema", className='label-class'),
+    html.H1("Uso de recursos do sistema"),
     html.Div([
-        html.Label('Memória', className='label-class'),
-        dcc.Graph(id='mem-graph', className='graph-style'),
-        html.Label('Tráfego de Rede', className='label-class'),
-        dcc.Graph(id='net-graph', className='graph-style'),
-    ]),
+        html.Label('Memória'),
+        dcc.Graph(id='mem-graph'),
+        html.Label('Tráfego de Rede'),
+        dcc.Graph(id='net-graph'),
+    ], className="banner"),
     dcc.Interval(
         id='interval-component-resources',
         interval=1*1000,  # 1 segundo
         n_intervals=0
     ),
-    html.H1("Média Móvel de CPUs", className='label-class'),
-    dcc.Graph(id='live-update-graph', className='graph-style'),
+    html.H1("Média Móvel de CPUs"),
+    dcc.Graph(id='live-update-graph'),
     dcc.Interval(
         id='interval-component-graph',
         interval=1*1000,  # Atualização a cada 1 segundo
@@ -65,7 +65,6 @@ def update_resources(n):
             'type': 'indicator',
             'mode': 'gauge+number',
             'value': mem_percent,
-            'title': {'text': 'Porcentagem de uso de Memória'},
             'gauge': {
                 'axis': {'range': [0, 100]},
                 'bar': {'color': 'darkgreen'},
@@ -78,7 +77,6 @@ def update_resources(n):
             'type': 'indicator',
             'mode': 'gauge+number',
             'value': net_percent,
-            'title': {'text': 'Porcentagem de tráfego de Rede'},
             'gauge': {
                 'axis': {'range': [0, 100]},
                 'bar': {'color': 'darkred'},
