@@ -125,4 +125,4 @@ def update_graph(n):
 
 # Executando o servico
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=32196)
+    app.run_server(host='0.0.0.0', port=32196, debug=True)

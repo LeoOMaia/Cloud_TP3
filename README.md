@@ -21,6 +21,13 @@ kubectl logs <name pod>
 ### TASK 2
 Usamos `git actions` para atualizar a imagem do dockerhub.
 
+
+Deletando pod e servico
+```
+kubectl delete svc dashboard-service
+kubectl delete deploy dashboard
+```
+
 Criando pod e serviço.
 ```
 kubectl -n leonardomaia apply -f deployment.yaml -f service.yaml
