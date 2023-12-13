@@ -25,7 +25,6 @@ cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
 app = Dash(__name__)
 
 # Layout do Dashboard
-# Layout do Dashboard
 app.layout = html.Div([
     html.H1("Uso de recursos do sistema"),
     html.Div([
@@ -33,19 +32,18 @@ app.layout = html.Div([
         dcc.Graph(id='cpu-graph'),
         html.Label('Porcentagem de uso de Memória'),
         dcc.Graph(id='mem-graph'),
-        html.Label('Porcentagem de trafego de Rede'),
+        html.Label('Porcentagem de tráfego de Rede'),
         dcc.Graph(id='net-graph'),
     ]),
     dcc.Interval(
-        id='interval-component',
-        interval=1*1000, # 1seg
+        id='interval-component-resources',
+        interval=1*1000,  # 1 segundo
         n_intervals=0
-    )
-    
-    html.H1("Media Movel de CPUs"),
+    ),
+    html.H1("Média Móvel de CPUs"),
     dcc.Graph(id='live-update-graph'),
     dcc.Interval(
-        id='interval-component',
+        id='interval-component-graph',
         interval=1*1000,  # Atualização a cada 1 segundo
         n_intervals=0
     )
@@ -58,39 +56,57 @@ app.layout = html.Div([
         dash.dependencies.Output('mem-graph', 'figure'),
         dash.dependencies.Output('net-graph', 'figure')
     ],
-    [dash.dependencies.Input('interval-component', 'n_intervals')]
+    [dash.dependencies.Input('interval-component-resources', 'n_intervals')]
 )
 def update_resources(n):
     cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
-
+    
     # Criando gráficos simples de barras para exibir os valores de CPU, memória e rede
     cpu_figure = {
-        'data': [{'type': 'indicator',
-                  'mode': 'gauge+number',
-                  'value': cpu_percent,
-                  'title': {'text': 'Porcentagem de uso de CPU'}}],
+        'data': [{
+            'type': 'indicator',
+            'mode': 'gauge+number',
+            'value': cpu_percent,
+            'title': {'text': 'Porcentagem de uso de CPU'},
+            'gauge': {
+                'axis': {'range': [0, 100]},
+                'bar': {'color': 'darkblue'},
+            }
+        }],
         'layout': {'title': 'Porcentagem de uso de CPU'}
     }
     mem_figure = {
-        'data': [{'type': 'indicator',
-                  'mode': 'gauge+number',
-                  'value': mem_percent,
-                  'title': {'text': 'Porcentagem de uso de Memória'}}],
+        'data': [{
+            'type': 'indicator',
+            'mode': 'gauge+number',
+            'value': mem_percent,
+            'title': {'text': 'Porcentagem de uso de Memória'},
+            'gauge': {
+                'axis': {'range': [0, 100]},
+                'bar': {'color': 'darkgreen'},
+            }
+        }],
         'layout': {'title': 'Porcentagem de uso de Memória'}
     }
     net_figure = {
-        'data': [{'type': 'indicator',
-                  'mode': 'gauge+number',
-                  'value': net_percent,
-                  'title': {'text': 'Porcentagem de trafego de Rede'}}],
-        'layout': {'title': 'Porcentagem de trafego de Rede'}
+        'data': [{
+            'type': 'indicator',
+            'mode': 'gauge+number',
+            'value': net_percent,
+            'title': {'text': 'Porcentagem de tráfego de Rede'},
+            'gauge': {
+                'axis': {'range': [0, 100]},
+                'bar': {'color': 'darkred'},
+            }
+        }],
+        'layout': {'title': 'Porcentagem de tráfego de Rede'}
     }
     return cpu_figure, mem_figure, net_figure
 
 # Callback para atualizar o gráfico de média móvel
 @app.callback(
     dash.dependencies.Output('live-update-graph', 'figure'),
-    [dash.dependencies.Input('interval-component', 'n_intervals')]
+    [dash.dependencies.Input('interval-component-graph', 'n_intervals')]
 )
 def update_graph(n):
     cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
