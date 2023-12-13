@@ -22,8 +22,8 @@ data:
     \       return_dict[f'moving-average-{i}'] = moving_average[i]\n    return return_dict"
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-12-13T02:48:37Z"
+  creationTimestamp: "2023-12-13T16:47:09Z"
   name: pyfile
   namespace: leonardomaia
-  resourceVersion: "4430566"
-  uid: 5a4bdfa0-c516-4937-a4b1-1c4ba5b6a25f
+  resourceVersion: "4507024"
+  uid: f8ab6edf-ca66-4783-a64d-424878c69da0

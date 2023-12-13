@@ -13,7 +13,7 @@ spec:
       labels:
         app: runtime
     spec:
-      ## Dashboard Runtime ##
+      ## Runtime Container ##
       containers:
       - name: runtime
         image: leoomaia/cloud_my_runtime

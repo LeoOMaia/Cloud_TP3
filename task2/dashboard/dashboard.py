@@ -3,10 +3,14 @@ from dash import Dash, html, dcc
 import redis
 import json
 import plotly.graph_objs as go
+import multiprocessing
+
+HOST = os.environ.get('REDIS_HOST')
+PORT = int(os.environ.get('REDIS_PORT'))
 
 def Date_from_redis():
     # Redis esta no IP 192.168.121.66 e na porta 6379
-    connection_redis = redis.Redis(host='192.168.121.66', port=6379, db=0)
+    connection_redis = redis.Redis(host=HOST, port=PORT, db=0)
     request_data = connection_redis.get("leonardooliveira-proj3-output").decode('utf-8')
     
     # Pegando os dados do Redis em formato JSON e retornando os dados computados
@@ -14,7 +18,7 @@ def Date_from_redis():
     mem_percent = redis_data['percent-memory-use']
     net_percent = redis_data['percent-network-egress']
     moving_average = {}
-    for i in range(16):
+    for i in range(multiprocessing.cpu_count()):
         moving_average[i] = redis_data[f'moving-average-{i}']
     return mem_percent, net_percent, moving_average
 
