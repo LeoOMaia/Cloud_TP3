@@ -61,7 +61,7 @@ app.layout = html.Div([
     [dash.dependencies.Input('interval-component', 'n_intervals')]
 )
 def update_resources(n):
-    cpu_percent, mem_percent, net_percent = get_data_from_redis()
+    cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
 
     # Criando gráficos simples de barras para exibir os valores de CPU, memória e rede
     cpu_figure = {
@@ -93,8 +93,8 @@ def update_resources(n):
     [dash.dependencies.Input('interval-component', 'n_intervals')]
 )
 def update_graph(n):
-    cpu_percent, mem_percent, net_percent, moving_average = get_data_from_redis()
-    x = list(range(16))  # Eixo x para os valores de moving_average
+    cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
+    x = list(range(16))  # Eixo x para numero de CPU
     y = list(moving_average.values())  # Valores para o eixo y
     # Criando o gráfico de barras
     trace = go.Bar(
