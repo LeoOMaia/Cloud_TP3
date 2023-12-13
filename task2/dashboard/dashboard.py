@@ -1,4 +1,5 @@
 from dash import Dash, html, dcc
+from dash.dependencies import Input, Output
 import redis
 import json
 import plotly.graph_objs as go
