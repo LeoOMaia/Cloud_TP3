@@ -5,7 +5,7 @@ def handler(input: dict, context: object) -> dict:
     mem_cashed = input['virtual_memory-cached']
     mem_buffer = input['virtual_memory-buffers']
     mem_total = input['virtual_memory-total']
-    mem_percent = ((mem_cashed + mem_buffer)) * 100 / mem_total
+    mem_percent = ((mem_cashed + mem_buffer) * 100) / mem_total
 
     # porcentagem de trafego de rede
     bytes_sent = input['net_io_counters_eth0-packets_sent']
