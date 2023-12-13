@@ -31,13 +31,9 @@ app.layout = html.Div([
             style={'text-align': 'center', 'color': 'teal', 'font-family': 'Arial', 'padding': '20px'}
     ),
     html.Div([
-        html.Label('Memória', 
-                   style={'text-align': 'center', 'color': 'red', 'font-family': 'Arial', 'padding': '20px'}
-        ),
+        html.Label(''),
         dcc.Graph(id='mem-graph'),
-        html.Label('Tráfego de Rede',
-                   style={'text-align': 'center', 'color': 'red', 'font-family': 'Arial', 'padding': '20px'}
-        ),
+        html.Label(''),
         dcc.Graph(id='net-graph'),
     ], style={'background-color': 'lightgray'}),
     dcc.Interval(
@@ -78,7 +74,7 @@ def update_resources(n):
                 'bar': {'color': 'darkgreen'},
             }
         }],
-        'layout': {'title': 'Porcentagem de uso de Memória'}
+        'layout': {'title': 'Porcentagem de uso de Memória', 'height': 300, color='red'}
     }
     net_figure = {
         'data': [{
@@ -90,7 +86,7 @@ def update_resources(n):
                 'bar': {'color': 'darkred'},
             }
         }],
-        'layout': {'title': 'Porcentagem de tráfego de Rede'}
+        'layout': {'title': 'Porcentagem de tráfego de Rede', 'height': 300, color='red'}
     }
     return mem_figure, net_figure
 
