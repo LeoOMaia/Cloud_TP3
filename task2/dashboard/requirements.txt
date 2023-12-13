@@ -1,2 +1,4 @@
 dash
 redis
+json
+plotly==5.3.1
