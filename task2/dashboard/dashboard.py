@@ -74,7 +74,7 @@ def update_resources(n):
                 'bar': {'color': 'darkgreen'},
             }
         }],
-        'layout': {'title': 'Porcentagem de uso de Memória', 'height': 300, color='red'}
+        'layout': {'title': 'Porcentagem de uso de Memória', 'height': 300, 'color':'red'}
     }
     net_figure = {
         'data': [{
@@ -86,7 +86,7 @@ def update_resources(n):
                 'bar': {'color': 'darkred'},
             }
         }],
-        'layout': {'title': 'Porcentagem de tráfego de Rede', 'height': 300, color='red'}
+        'layout': {'title': 'Porcentagem de tráfego de Rede', 'height': 300, 'color':'red'}
     }
     return mem_figure, net_figure
 
