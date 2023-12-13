@@ -27,7 +27,7 @@ app = Dash(__name__)
 
 # Layout do Dashboard
 app.layout = html.Div([
-    html.H1("Uso de recursos do sistema", ClassName='label-class'),
+    html.H1("Uso de recursos do sistema", className='label-class'),
     html.Div([
         html.Label('Memória'),
         dcc.Graph(id='mem-graph'),
