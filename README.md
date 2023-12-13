@@ -13,22 +13,29 @@ kubectl create configmap pyfile --from-file pyfile=function.py --output yaml > p
 kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml > outputkey.yaml
 kubectl -n leonardomaia apply -f deployment.yaml
 ```
-Para ver se esta correto, verifique os logs.
+Para ver se esta correto, verifique se chegou informacao.
 ```
-kubectl get pods
-kubectl logs <name pod>
+redis-cli
+GET leonardooliveira-proj3-output
 ```
 ### TASK 2
 Usamos `git actions` para atualizar a imagem do dockerhub.
 
-
-Deletando pod e servico
+Subindo servico
 ```
-kubectl delete svc dashboard-service
+kubectl -n leonardomaia apply -f service.yaml
+```
+Deletando servico
+```
+kubectl delete service dashboard-service
+```
+
+Deletando pod
+```
 kubectl delete deploy dashboard
 ```
 
-Criando pod e serviço.
+Criando pod
 ```
-kubectl -n leonardomaia apply -f deployment.yaml -f service.yaml
+kubectl -n leonardomaia apply -f deployment.yaml
 ```

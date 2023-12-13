@@ -5,8 +5,8 @@ import json
 import plotly.graph_objs as go
 
 def Date_from_redis():
-    # Redis esta no IP 67.159.94.11 e na porta 6379
-    connection_redis = redis.Redis(host='67.159.94.11', port=6379, db=0)
+    # Redis esta no IP 192.168.121.66 e na porta 6379
+    connection_redis = redis.Redis(host='192.168.121.66', port=6379, db=0)
     request_data = connection_redis.get("leonardooliveira-proj3-output").decode('utf-8')
     
     # Pegando os dados do Redis em formato JSON e retornando os dados computados

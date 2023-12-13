@@ -1,5 +1,7 @@
 def handler(input: dict, context: object) -> dict:
-    # a quantidade de CPUs do sistema é fixa, utilizamos psutil para obter essa informação antes de criar a função
+    # A quantidade de CPUs do sistema é fixa
+    # Utilizamos psutil para obter essa informação antes de criar a função
+    # Como a imagem do container é fixa, não conseguimos importar funções para calcular CPUs
     cpus = 16
 
     # porcentagem de uso de cada CPU
