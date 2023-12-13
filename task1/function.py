@@ -1,15 +1,4 @@
-def handler(input: dict, context: object) -> dict:
-    # A quantidade de CPUs do sistema é fixa
-    # Utilizamos psutil para obter essa informação antes de criar a função
-    # Como a imagem do container é fixa, não conseguimos importar funções para calcular CPUs
-    cpus = 16
-
-    # porcentagem de uso de cada CPU
-    cpu_percent = {}
-    for i in range(cpus):
-        percent = input[f'cpu_percent-{i}']
-        cpu_percent[i] = percent
-    
+def handler(input: dict, context: object) -> dict:    
     # porcentagem de uso de memória
     mem_cashed = input['virtual_memory-cached']
     mem_buffer = input['virtual_memory-buffers']
@@ -23,7 +12,16 @@ def handler(input: dict, context: object) -> dict:
         net_percent = (bytes_sent * 100) / (bytes_sent + bytes_recv)
     else:
         net_percent = 0
-
+            
+    # A quantidade de CPUs do sistema é fixa
+    # Utilizamos psutil para obter essa informação antes de criar a função
+    # Como a imagem do container é fixa, não conseguimos importar funções para calcular CPUs
+    cpus = 16
+    # porcentagem de uso de cada CPU
+    cpu_percent = {}
+    for i in range(cpus):
+        percent = input[f'cpu_percent-{i}']
+        cpu_percent[i] = percent
     # média móvel de utilização de cada CPU no ultimo minuto
     moving_average = {}
     for i in range(cpus):
@@ -36,7 +34,6 @@ def handler(input: dict, context: object) -> dict:
     
     # retorna o dicionário com os dados
     return_dict = {
-        'percent-cpu-use': cpu_percent,
         'percent-memory-use': mem_percent,
         'percent-network-egress': net_percent,
     }

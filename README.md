@@ -25,17 +25,8 @@ Subindo servico
 ```
 kubectl -n leonardomaia apply -f service.yaml
 ```
-Deletando servico
-```
-kubectl delete service dashboard-service
-```
-
-Deletando pod
+Criando ou Renovando pod
 ```
 kubectl delete deploy dashboard
-```
-
-Criando pod
-```
 kubectl -n leonardomaia apply -f deployment.yaml
 ```

@@ -11,16 +11,15 @@ def Date_from_redis():
     
     # Pegando os dados do Redis em formato JSON e retornando os dados computados
     redis_data = json.loads(request_data)
-    cpu_percent = redis_data['percent-cpu-use']
     mem_percent = redis_data['percent-memory-use']
     net_percent = redis_data['percent-network-egress']
     moving_average = {}
     for i in range(16):
         moving_average[i] = redis_data[f'moving-average-{i}']
-    return cpu_percent, mem_percent, net_percent, moving_average
+    return mem_percent, net_percent, moving_average
 
 # Pegando dados ja processados do Redis
-cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
+mem_percent, net_percent, moving_average = Date_from_redis()
 
 # Criando o Dashboard
 app = Dash(__name__)
@@ -29,8 +28,6 @@ app = Dash(__name__)
 app.layout = html.Div([
     html.H1("Uso de recursos do sistema"),
     html.Div([
-        html.Label('Porcentagem de uso de CPU'),
-        dcc.Graph(id='cpu-graph'),
         html.Label('Porcentagem de uso de Memória'),
         dcc.Graph(id='mem-graph'),
         html.Label('Porcentagem de tráfego de Rede'),
@@ -53,29 +50,15 @@ app.layout = html.Div([
 # Callback para atualizar Recursos do sistema
 @app.callback(
     [
-        dash.dependencies.Output('cpu-graph', 'figure'),
         dash.dependencies.Output('mem-graph', 'figure'),
         dash.dependencies.Output('net-graph', 'figure')
     ],
     [dash.dependencies.Input('interval-component-resources', 'n_intervals')]
 )
 def update_resources(n):
-    cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
+    mem_percent, net_percent, moving_average = Date_from_redis()
     
-    # Criando gráficos simples de barras para exibir os valores de CPU, memória e rede
-    cpu_figure = {
-        'data': [{
-            'type': 'indicator',
-            'mode': 'gauge+number',
-            'value': cpu_percent,
-            'title': {'text': 'Porcentagem de uso de CPU'},
-            'gauge': {
-                'axis': {'range': [0, 100]},
-                'bar': {'color': 'darkblue'},
-            }
-        }],
-        'layout': {'title': 'Porcentagem de uso de CPU'}
-    }
+    # Criando gráficos de indicadores para memória e rede
     mem_figure = {
         'data': [{
             'type': 'indicator',
@@ -102,7 +85,7 @@ def update_resources(n):
         }],
         'layout': {'title': 'Porcentagem de tráfego de Rede'}
     }
-    return cpu_figure, mem_figure, net_figure
+    return mem_figure, net_figure
 
 # Callback para atualizar o gráfico de média móvel
 @app.callback(
@@ -111,8 +94,9 @@ def update_resources(n):
 )
 def update_graph(n):
     cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
-    x = list(range(16))  # Eixo x para numero de CPU
-    y = list(moving_average.values())  # Valores para o eixo y
+    x = list(range(1,17))  # Eixo x para cada CPU ordenada
+    y = list(moving_average.values()) # Eixo y com a média móvel de cada CPU
+    
     # Criando o gráfico de barras
     trace = go.Bar(
         x=x,
@@ -120,10 +104,10 @@ def update_graph(n):
         name='Media Movel de CPUs',
     )
     
-    layout = go.Layout(title='Media Movel de CPUs')
+    layout = go.Layout(title='Média Móvel de CPUs', yaxis=dict(range=[0, 100]))
     return {'data': [trace], 'layout': layout}
 
 
 # Executando o servico
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=32196, debug=True)
+    app.run_server(host='0.0.0.0', port=32196)
