@@ -93,7 +93,7 @@ def update_resources(n):
     [dash.dependencies.Input('interval-component-graph', 'n_intervals')]
 )
 def update_graph(n):
-    cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
+    mem_percent, net_percent, moving_average = Date_from_redis()
     x = list(range(1,17))  # Eixo x para cada CPU ordenada
     y = list(moving_average.values()) # Eixo y com a média móvel de cada CPU
     
