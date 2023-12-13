@@ -2,6 +2,7 @@ import dash
 from dash import Dash, html, dcc
 import redis
 import json
+import os
 import plotly.graph_objs as go
 import multiprocessing
 

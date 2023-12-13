@@ -3,8 +3,8 @@ data:
   REDIS_OUTPUT_KEY: leonardooliveira-proj3-output
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-12-13T16:47:09Z"
+  creationTimestamp: "2023-12-13T18:40:14Z"
   name: outputkey
   namespace: leonardomaia
-  resourceVersion: "4507025"
-  uid: eef29277-f1fe-48c4-83dd-596218db5841
+  resourceVersion: "4519694"
+  uid: 91a2f0e4-99ba-4571-b0f4-135da303c108

@@ -17,6 +17,7 @@ Para ver se esta correto, verifique se chegou informacao.
 ```
 redis-cli
 GET leonardooliveira-proj3-output
+exit
 ```
 ### TASK 2
 Usamos `git actions` para atualizar a imagem do dockerhub.
