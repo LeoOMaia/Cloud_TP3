@@ -1,5 +1,5 @@
-from dash import Dash, html, dcc, dash
-from dash.dependencies import Input, Output
+import dash
+from dash import Dash, html, dcc
 import redis
 import json
 import plotly.graph_objs as go
@@ -53,11 +53,11 @@ app.layout = html.Div([
 # Callback para atualizar Recursos do sistema
 @app.callback(
     [
-        Output('cpu-graph', 'figure'),
-        Output('mem-graph', 'figure'),
-        Output('net-graph', 'figure')
+        dash.dependencies.Output('cpu-graph', 'figure'),
+        dash.dependencies.Output('mem-graph', 'figure'),
+        dash.dependencies.Output('net-graph', 'figure')
     ],
-    [Input('interval-component-resources', 'n_intervals')]
+    [dash.dependencies.Input('interval-component-resources', 'n_intervals')]
 )
 def update_resources(n):
     cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
@@ -106,8 +106,8 @@ def update_resources(n):
 
 # Callback para atualizar o gráfico de média móvel
 @app.callback(
-    Output('live-update-graph', 'figure'),
-    [Input('interval-component-graph', 'n_intervals')]
+    dash.dependencies.Output('live-update-graph', 'figure'),
+    [dash.dependencies.Input('interval-component-graph', 'n_intervals')]
 )
 def update_graph(n):
     cpu_percent, mem_percent, net_percent, moving_average = Date_from_redis()
