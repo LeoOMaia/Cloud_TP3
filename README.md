@@ -9,8 +9,8 @@ kubectl delete configmap outputkey
 ```
 Criando files `pyfile.yaml`, `outputkey.yaml` e seus respectivos configmap, e criando pod.
 ```
-kubectl create configmap pyfile --from-file pyfile=function.py --output yaml > pyfile.yaml
-kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml > outputkey.yaml
+kubectl create configmap pyfile --from-file pyfile=function.py --output yaml > configmaps/pyfile.yaml
+kubectl create configmap outputkey --from-literal REDIS_OUTPUT_KEY=leonardooliveira-proj3-output --output yaml > configmaps/outputkey.yaml
 kubectl -n leonardomaia apply -f deployment.yaml
 ```
 Para ver se esta correto, verifique se chegou informacao.
