@@ -8,8 +8,8 @@ def handler(input: dict, context: object) -> dict:
     mem_percent = ((mem_cashed + mem_buffer) * 100) / mem_total
 
     # porcentagem de trafego de rede
-    bytes_sent = input['net_io_counters_eth0-packets_sent']
-    bytes_recv = input['net_io_counters_eth0-packets_recv']
+    bytes_sent = input['net_io_counters_eth0-bytes_sent']
+    bytes_recv = input['net_io_counters_eth0-bytes_recv']
     if bytes_sent + bytes_recv > 0:
         net_percent = (bytes_sent * 100) / (bytes_sent + bytes_recv)
     else:
