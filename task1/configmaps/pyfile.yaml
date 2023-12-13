@@ -3,10 +3,10 @@ data:
   pyfile: "import multiprocessing\n\ndef handler(input: dict, context: object) ->
     dict:    \n    # porcentagem de uso de memória\n    mem_cashed = input['virtual_memory-cached']\n
     \   mem_buffer = input['virtual_memory-buffers']\n    mem_total = input['virtual_memory-total']\n
-    \   mem_percent = ((mem_cashed + mem_buffer)) * 100 / mem_total\n\n    # porcentagem
-    de trafego de rede\n    bytes_sent = input['net_io_counters_eth0-packets_sent']\n
-    \   bytes_recv = input['net_io_counters_eth0-packets_recv']\n    if bytes_sent
-    + bytes_recv > 0:\n        net_percent = (bytes_sent * 100) / (bytes_sent + bytes_recv)\n
+    \   mem_percent = ((mem_cashed + mem_buffer) * 100) / mem_total\n\n    # porcentagem
+    de trafego de rede\n    bytes_sent = input['net_io_counters_eth0-bytes_sent']\n
+    \   bytes_recv = input['net_io_counters_eth0-bytes_recv']\n    if bytes_sent +
+    bytes_recv > 0:\n        net_percent = (bytes_sent * 100) / (bytes_sent + bytes_recv)\n
     \   else:\n        net_percent = 0\n            \n    # quantidade de CPUs\n    cpus
     = multiprocessing.cpu_count()\n    # porcentagem de uso de cada CPU\n    cpu_percent
     = {}\n    for i in range(cpus):\n        percent = input[f'cpu_percent-{i}']\n
@@ -20,8 +20,8 @@ data:
     \       return_dict[f'moving-average-{i}'] = moving_average[i]\n    return return_dict"
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-12-13T18:40:14Z"
+  creationTimestamp: "2023-12-13T21:53:23Z"
   name: pyfile
   namespace: leonardomaia
-  resourceVersion: "4519693"
-  uid: 55841f57-8ca4-49c6-815b-92e03f79ebd8
+  resourceVersion: "4540726"
+  uid: ad74493b-0de6-49e9-b0e5-aca54b337cd6
