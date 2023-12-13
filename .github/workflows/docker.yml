@@ -24,3 +24,10 @@ jobs:
           context: task2/dashboard/
           push: true
           tags: leoomaia/cloud_my_dashboard
+
+      - name: Build and Push image to change Runtime container
+        uses: docker/build-push-action@v4
+        with:
+          context: task3/runtime/
+          push: true
+          tags: leoomaia/cloud_my_runtime
