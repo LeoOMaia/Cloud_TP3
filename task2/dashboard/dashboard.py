@@ -23,23 +23,23 @@ def Date_from_redis():
 mem_percent, net_percent, moving_average = Date_from_redis()
 
 # Criando o Dashboard
-app = Dash(__name__,)
+app = Dash(__name__)
 
 # Layout do Dashboard
 app.layout = html.Div([
-    html.H1("Uso de recursos do sistema"),
+    html.H1("Uso de recursos do sistema", ClassName="banner"),
     html.Div([
         html.Label('Memória'),
         dcc.Graph(id='mem-graph'),
         html.Label('Tráfego de Rede'),
         dcc.Graph(id='net-graph'),
-    ], className="banner"),
+    ]),
     dcc.Interval(
         id='interval-component-resources',
         interval=1*1000,  # 1 segundo
         n_intervals=0
     ),
-    html.H1("Média Móvel de CPUs"),
+    html.H1("Média Móvel de CPUs", ClassName="banner"),
     dcc.Graph(id='live-update-graph'),
     dcc.Interval(
         id='interval-component-graph',
