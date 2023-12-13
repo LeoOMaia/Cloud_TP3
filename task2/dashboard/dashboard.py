@@ -27,7 +27,7 @@ app = Dash(__name__)
 
 # Layout do Dashboard
 app.layout = html.Div([
-    html.H1("Uso de recursos do sistema", ClassName="banner"),
+    html.H1("Uso de recursos do sistema", ClassName='label-class'),
     html.Div([
         html.Label('Memória'),
         dcc.Graph(id='mem-graph'),
@@ -39,7 +39,7 @@ app.layout = html.Div([
         interval=1*1000,  # 1 segundo
         n_intervals=0
     ),
-    html.H1("Média Móvel de CPUs", ClassName="banner"),
+    html.H1("Média Móvel de CPUs"),
     dcc.Graph(id='live-update-graph'),
     dcc.Interval(
         id='interval-component-graph',

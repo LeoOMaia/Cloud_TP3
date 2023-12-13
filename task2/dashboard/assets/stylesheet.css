@@ -1,13 +1,8 @@
-.banner{
-    height: 75px;
-    margin: 0px -10px 10px;
-    background-color: rgb(66, 196, 247);
-    border-radius: 2px;
+.label-class {
+    font-size: 18px;
+    color: teal;
 }
 
-.banner h2{
-    color: white;
-    padding-top: 10px;
-    margin-left: 2%;
-    display: inline-block;
+.graph-style {
+    margin-top: 20px;
 }
